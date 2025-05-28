@@ -89,7 +89,7 @@ If ScriptPilot is accepted into the official Obsidian community plugins list, yo
 
 You can open the ScriptPilot settings panel in a few ways:
 
-*   Click the **ScriptPilot ribbon icon** (looks like a code symbol: <img src="https://lucide.dev/static/icons/code-glyph.svg" width="16" height="16" alt="Code Glyph Icon"/>) in the left sidebar.
+*   Click the **ScriptPilot ribbon icon** (looks like a code symbol: <img src="https://unpkg.com/lucide-static@latest/icons/code.svg" width="16" height="16" alt="Code Glyph Icon"/>) in the left sidebar.
 *   Use the Obsidian Command Palette (Ctrl/Cmd + P) and search for `ScriptPilot: Open Settings`.
 
 The settings tab is your central hub for managing libraries.
@@ -138,7 +138,7 @@ This is where you configure individual JavaScript libraries.
 #### Editing an Existing Library
 
 *   In the "Configured Libraries" list, find the library you want to modify.
-*   Click the **Edit icon** (gear symbol: <img src="https://lucide.dev/static/icons/settings-2.svg" width="16" height="16" alt="Edit Icon"/>) next to the library.
+*   Click the **Edit icon** (gear symbol: <img src="https://unpkg.com/lucide-static@latest/icons/settings-2.svg" width="16" height="16" alt="Edit Icon"/>) next to the library.
 *   The "Edit Script Library" modal will appear, pre-filled with the current settings. Make your changes and click `Save Changes`.
 
 #### Loading/Unloading a Library
@@ -146,20 +146,20 @@ This is where you configure individual JavaScript libraries.
 For each configured library in the list, you'll see control buttons:
 
 *   **Load/Unload Button:**
-    *   If the library is unloaded, it shows a **Play icon** (<img src="https://lucide.dev/static/icons/play.svg" width="16" height="16" alt="Play Icon"/>). Click to load the library.
-    *   If the library is loaded, it shows a **Stop icon** (<img src="https://lucide.dev/static/icons/stop-circle.svg" width="16" height="16" alt="Stop Icon"/>). Click to unload the library.
+    *   If the library is unloaded, it shows a **Play icon** (<img src="https://unpkg.com/lucide-static@latest/icons/play.svg" width="16" height="16" alt="Play Icon"/>). Click to load the library.
+    *   If the library is loaded, it shows a **Stop icon** (<img src="https://unpkg.com/lucide-static@latest/icons/stop-circle.svg" width="16" height="16" alt="Stop Icon"/>). Click to unload the library.
     *   This button is disabled if the library is currently in the process of loading or if its type is not configured.
 *   **Status Indicator:** To the left of the library name, an icon indicates its current state:
-    *   <img src="https://lucide.dev/static/icons/loader.svg" width="16" height="16" alt="Loading Icon"/> **Loading:** The library is currently being fetched and injected.
-    *   <img src="https://lucide.dev/static/icons/check-circle.svg" width="16" height="16" alt="Loaded Icon"/> **Loaded:** The library is active.
-    *   <img src="https://lucide.dev/static/icons/x-circle.svg" width="16" height="16" alt="Error Icon"/> **Error:** An error occurred during the last load/unload attempt. Hover for details or edit the library to see the full error.
-    *   <img src="https://lucide.dev/static/icons/circle-dashed.svg" width="16" height="16" alt="Unloaded Icon"/> **Unloaded/Inactive:** The library is configured but not currently loaded.
+    *   <img src="https://unpkg.com/lucide-static@latest/icons/loader.svg" width="16" height="16" alt="Loading Icon"/> **Loading:** The library is currently being fetched and injected.
+    *   <img src="https://unpkg.com/lucide-static@latest/icons/check-circle.svg" width="16" height="16" alt="Loaded Icon"/> **Loaded:** The library is active.
+    *   <img src="https://unpkg.com/lucide-static@latest/icons/x-circle.svg" width="16" height="16" alt="Error Icon"/> **Error:** An error occurred during the last load/unload attempt. Hover for details or edit the library to see the full error.
+    *   <img src="https://unpkg.com/lucide-static@latest/icons/circle-dashed.svg" width="16" height="16" alt="Unloaded Icon"/> **Unloaded/Inactive:** The library is configured but not currently loaded.
 
 You can also use Obsidian commands to load/unload libraries (see "Commands" section below).
 
 #### Removing a Library Configuration
 
-*   Click the **Remove icon** (trash can: <img src="https://lucide.dev/static/icons/trash-2.svg" width="16" height="16" alt="Remove Icon"/>) next to the library you want to remove.
+*   Click the **Remove icon** (trash can: <img src="https://unpkg.com/lucide-static@latest/icons/trash-2.svg" width="16" height="16" alt="Remove Icon"/>) next to the library you want to remove.
 *   You'll be asked for confirmation.
 *   If the library is currently loaded, ScriptPilot will attempt to unload it first before removing its configuration.
 *   This action deletes the library's entry from ScriptPilot's settings and cannot be undone.
@@ -177,9 +177,9 @@ The panel will list active libraries and their status, particularly useful for d
 
 If enabled in General Settings, ScriptPilot adds an item to the Obsidian status bar:
 
-*   <img src="https://lucide.dev/static/icons/loader.svg" width="16" height="16" alt="Loading Icon"/> `ScriptPilot: Loading X...`: Indicates X libraries are currently loading.
-*   <img src="https://lucide.dev/static/icons/check-circle.svg" width="16" height="16" alt="Loaded Icon"/> `ScriptPilot: X active`: Indicates X libraries are successfully loaded.
-*   <img src="https://lucide.dev/static/icons/code-glyph.svg" width="16" height="16" alt="Code Glyph Icon"/> `ScriptPilot: None active`: No libraries are currently loaded.
+*   <img src="https://unpkg.com/lucide-static@latest/icons/loader.svg" width="16" height="16" alt="Loading Icon"/> `ScriptPilot: Loading X...`: Indicates X libraries are currently loading.
+*   <img src="https://unpkg.com/lucide-static@latest/icons/check-circle.svg" width="16" height="16" alt="Loaded Icon"/> `ScriptPilot: X active`: Indicates X libraries are successfully loaded.
+*   <img src="https://unpkg.com/lucide-static@latest/icons/code.svg" width="16" height="16" alt="Code Glyph Icon"/> `ScriptPilot: None active`: No libraries are currently loaded.
 
 ### Commands
 
@@ -242,13 +242,12 @@ Eruda is a console for mobile browsers, extremely useful for debugging on Obsidi
 4.  **Save:** Click `Add Library`.
 5.  **Load Eruda:**
     *   Find "Eruda Console" in your list of configured libraries.
-    *   Click the **Play icon** (<img src="https://lucide.dev/static/icons/play.svg" width="16" height="16" alt="Play Icon"/>) to load it.
+    *   Click the **Play icon** (<img src="https://unpkg.com/lucide-static@latest/icons/play.svg" width="16" height="16" alt="Play Icon"/>) to load it.
     *   Alternatively, use the command `ScriptPilot: Load (HTTP (Iframe)) - Eruda Console`.
 
     You should see a floating gear icon appear (usually in the bottom right corner) – this is Eruda! Click it to open the console.
 
-    <img src="https://raw.githubusercontent.com/liriliri/eruda/master/doc/images/banner.jpg" alt="Eruda Screenshot" width="400"/>
-    *(Image Credit: Eruda GitHub Repository)*
+    <img src="https://i.stack.imgur.com/2014/09/09/eruda-screenshot.png" alt="Eruda Screenshot" width="400"/>
 
 ---
 
@@ -257,7 +256,7 @@ Eruda is a console for mobile browsers, extremely useful for debugging on Obsidi
 *   **Library Fails to Load:**
     *   **Check Developer Console:** On Desktop, press `Ctrl+Shift+I` (Windows/Linux) or `Cmd+Opt+I` (macOS) to open the developer console. Look for errors related to network requests (e.g., 404 Not Found), CORS issues (often for `HTTP (Iframe)` type), or JavaScript errors from the script itself.
     *   **Verify Source:** Double-check the URL or File Path in ScriptPilot settings.
-    *   **ScriptPilot Error Message:** In the ScriptPilot settings tab, hover over the error icon (<img src="https://lucide.dev/static/icons/x-circle.svg" width="16" height="16" alt="Error Icon"/>) next to the library or edit the library to see the "Last Error" message.
+    *   **ScriptPilot Error Message:** In the ScriptPilot settings tab, hover over the error icon (<img src="https://unpkg.com/lucide-static@latest/icons/x-circle.svg" width="16" height="16" alt="Error Icon"/>) next to the library or edit the library to see the "Last Error" message.
     *   **CORS Issues (for HTTP Iframe):** If you see CORS errors, the server hosting the script does not permit it to be loaded from Obsidian's origin. You might need to find an alternative source or use the `HTTP (Capacitor)` type if on mobile (though this is not a universal CORS bypass).
     *   **CapacitorHttp Not Available (for HTTP Capacitor):** This type relies on Obsidian Mobile's infrastructure. If it fails, ensure you are on a mobile device and that this mechanism is functional in your Obsidian version.
 *   **Global Object Not Detected:**
@@ -278,7 +277,7 @@ Eruda is a console for mobile browsers, extremely useful for debugging on Obsidi
 ScriptPilot is an open-source project. Contributions, bug reports, and feature suggestions are welcome!
 
 *   **Issues:** Please report bugs or suggest features via the GitHub Issues tab.
-*   **Pull Requests:** If you'd like to contribute code, please feel free to open a Pull Request.
+*   **Pull Requests:** If you'd like to contribute code, please feel yourself to open a Pull Request.
 
 While contributions are encouraged, please understand that active maintenance or prompt responses from the original author may be limited.
 
@@ -293,7 +292,4 @@ This plugin is provided "as-is", without any warranty, express or implied. The a
 The future development and maintenance of this plugin by the original author are not guaranteed. It is released to the Obsidian community in the hope that it may be useful to others or serve as a foundation for further development.
 
 ---
-
-## License
-
-This plugin is licensed under the [MIT License](LICENSE.md). (You would typically include a LICENSE.md file with the MIT license text in your repository).
+This plugin is licensed under the [MIT License](LICENSE.md). 
