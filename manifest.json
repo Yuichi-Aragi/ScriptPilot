@@ -5,6 +5,6 @@
   "minAppVersion": "1.5.0",
   "description": "Load and manage custom JavaScript libraries within vault from local files or remote URLs. Extend vault functionality with your own scripts or trusted third-party libraries.",
   "author": "Yuichi-Aragi",
-  "authorUrl": "https://github.com/Yuichi-Aragi/ScriptPilot",
+  "authorUrl": "Yuichi-Aragi/ScriptPilot",
   "isDesktopOnly": false
 }
