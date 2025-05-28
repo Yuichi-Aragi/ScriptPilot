@@ -64,7 +64,7 @@ ScriptPilot offers a range of features to manage your JavaScript libraries:
 
 Since ScriptPilot is not yet in the official Obsidian community plugins list, you'll need to install it manually:
 
-1.  Go to the [Releases page](https://github.com/YOUR_USERNAME/scriptpilot-obsidian/releases) of this repository (replace `YOUR_USERNAME` with the actual GitHub repository path).
+1.  Go to the [Releases page](https://github.com/Yuichi-Aragi/ScriptPilot/releases) of this repository.
 2.  Download `main.js` and `manifest.json` from the latest release.
 3.  In your Obsidian vault, navigate to the `.obsidian/plugins/` directory. If it doesn't exist, create it.
 4.  Create a new folder named `scriptpilot` inside `.obsidian/plugins/`.
@@ -277,7 +277,6 @@ Eruda is a console for mobile browsers, extremely useful for debugging on Obsidi
 
 ScriptPilot is an open-source project. Contributions, bug reports, and feature suggestions are welcome!
 
-*   **Repository:** [https://github.com/YOUR_USERNAME/scriptpilot-obsidian](https://github.com/YOUR_USERNAME/scriptpilot-obsidian) (Please replace `YOUR_USERNAME` with the actual repository path).
 *   **Issues:** Please report bugs or suggest features via the GitHub Issues tab.
 *   **Pull Requests:** If you'd like to contribute code, please feel free to open a Pull Request.
 
