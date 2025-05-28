@@ -1,0 +1,177 @@
+--- START OF FILE styles.css ---
+
+/* --- ScriptPilot Plugin Styles --- */
+
+/* General Warning Callout in Settings - Uses Obsidian's native callout styling */
+/* .scriptpilot-warning is now just .callout with data-callout attribute */
+/* Ensure callout styles are distinct for different severities if needed */
+.callout[data-callout="warning"] .callout-title,
+.callout[data-callout="caution"] .callout-title {
+    /* Default Obsidian styling is usually good */
+}
+.callout[data-callout="danger"] .callout-title {
+    background-color: var(--color-red); /* Changed: Solid red background for better contrast */
+    color: var(--text-on-accent); /* Changed: White/light text for better contrast */
+}
+.callout[data-callout="danger"] .callout-icon svg {
+    color: var(--text-on-accent); /* Changed: White/light icon for better contrast */
+}
+
+/* Individual Library Entry in Settings List */
+.scriptpilot-entry {
+    padding: 12px 0; /* Slightly more padding */
+    border-bottom: 1px solid var(--background-modifier-border);
+}
+.scriptpilot-entry:last-child {
+    border-bottom: none;
+}
+.scriptpilot-entry .setting-item-info {
+    flex-grow: 1; /* Allow info to take available space */
+}
+.scriptpilot-entry .setting-item-name {
+    display: flex; /* Align status indicator nicely */
+    align-items: center;
+    font-weight: var(--font-semibold); /* Make name slightly bolder */
+}
+
+/* Status Indicator Icons */
+.scriptpilot-status-indicator {
+    margin-left: 8px;
+    font-size: var(--font-ui-small);
+    display: inline-flex; /* Helps with icon alignment */
+    align-items: center;
+}
+.scriptpilot-status-indicator svg {
+    width: var(--icon-s); /* Consistent icon size */
+    height: var(--icon-s);
+}
+.scriptpilot-status-loading svg { color: var(--text-accent); animation: spin 1s linear infinite; }
+.scriptpilot-status-loaded svg { color: var(--color-green); }
+.scriptpilot-status-error svg { color: var(--color-red); }
+.scriptpilot-status-unloaded svg { color: var(--text-faint); }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error Message Text for a Library */
+.scriptpilot-error-message {
+    color: var(--color-red);
+    font-size: var(--font-ui-smaller);
+    margin-top: 4px; /* More space */
+    white-space: pre-wrap;
+    word-break: break-word; /* Changed from break-all for better readability */
+}
+
+/* Global Object Presence Status Text */
+.scriptpilot-global-status-present {
+    color: var(--color-green);
+    font-size: var(--font-ui-smaller);
+    margin-top: 2px;
+}
+.scriptpilot-global-status-absent {
+    color: var(--color-orange);
+    font-size: var(--font-ui-smaller);
+    margin-top: 2px;
+}
+
+/* Controls for each library entry */
+.scriptpilot-controls .setting-item-control {
+    justify-content: flex-end;
+    gap: var(--size-2-2); /* Spacing between buttons using Obsidian variable */
+}
+.scriptpilot-controls .setting-item-control button {
+    padding: var(--size-2-2) var(--size-2-3); /* Consistent button padding */
+}
+
+
+/* Styling for the main modal (LibraryEditModal) */
+/* Apply transitions to the modal container for overall fade */
+.modal-container {
+    transition: opacity 0.2s ease-out; /* Added: Smooth fade for the entire modal container */
+}
+
+/* Apply transitions to the specific modal box (where .scriptpilot-modal is applied) */
+.scriptpilot-modal { /* This class is likely on the .modal element */
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out; /* Added: Smooth transition for modal box */
+    will-change: transform, opacity; /* Added: Hint to browser for performance optimization */
+}
+
+.scriptpilot-modal .modal-content {
+    padding: var(--modal-padding); /* Use Obsidian's modal padding */
+    will-change: transform, opacity; /* Re-added: Hint to browser for performance optimization for content */
+    /* Removed: transition: none !important; as we want smooth transitions now */
+}
+.scriptpilot-modal h2 {
+    margin-bottom: var(--size-4-4); /* Space below modal title */
+}
+.scriptpilot-modal .setting-item {
+    padding: var(--size-2-3) 0; /* Consistent padding for settings in modal */
+}
+
+/* Critical Security Warning in Modal */
+.scriptpilot-modal .callout[data-callout="danger"] {
+    margin-bottom: var(--size-16-4); /* Changed: Increased margin to a very large Obsidian variable */
+    position: relative; /* Ensure z-index applies correctly */
+    z-index: 99999;
+    color: var(--text-normal); /* Use normal text color for contrast */
+
+    /* Ensure the callout itself has enough internal space and doesn't clip its content */
+    padding-bottom: var(--size-4-2); /* Add padding to the bottom of the callout */
+    min-height: fit-content; /* Ensure it takes at least the height of its content */
+    display: block; /* Ensure it's a block element and takes full width/height */
+    overflow: visible; /* Ensure content is not clipped internally */
+    flex-shrink: 0; /* If the parent is a flex container, prevent shrinking */
+    clear: both; /* Add clear: both just in case of floats, though unlikely */
+}
+
+
+/* Textarea for code input in modal */
+.scriptpilot-code-input {
+    font-family: var(--font-monospace);
+    font-size: var(--font-ui-smaller);
+    min-height: 80px; /* Ensure decent height */
+    resize: vertical; /* Allow vertical resize */
+    background-color: var(--background-secondary); /* Differentiate from normal text inputs */
+    border: 1px solid var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    width: 100%; /* Make textarea fill its parent container */
+    white-space: pre-wrap; /* Ensure content wraps while preserving line breaks */
+    word-break: break-word; /* Break long words if necessary */
+}
+
+
+/* Container for buttons at the bottom of the modal */
+.modal-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--size-4-5); /* More space above buttons */
+    gap: var(--size-2-3); /* Space between buttons */
+}
+
+/* Real-time status panel in settings */
+.scriptpilot-realtime-status-panel {
+    margin-top: var(--size-4-2);
+    padding: var(--size-4-2);
+    background-color: var(--background-secondary);
+    border-radius: var(--radius-m);
+    font-size: var(--font-ui-small);
+    border: 1px solid var(--background-modifier-border);
+}
+
+.scriptpilot-realtime-item {
+    padding: var(--size-2-1) 0;
+    border-bottom: 1px solid var(--background-modifier-border-hover); /* Subtle separator */
+}
+.scriptpilot-realtime-item:last-child {
+    border-bottom: none;
+}
+
+/* Source URL/File Path display in library list */
+.scriptpilot-source {
+    font-size: var(--font-ui-smaller);
+    color: var(--text-muted); /* Use muted color for less emphasis */
+    word-break: break-all; /* Allow long URLs/paths to break */
+    margin-top: 2px;
+}

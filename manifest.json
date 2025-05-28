@@ -1,0 +1,10 @@
+{
+  "id": "scriptpilot",
+  "name": "ScriptPilot",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "description": "Effortlessly load and manage external JavaScript libraries from URLs (HTTP/HTTPS via Iframe or Capacitor) or local vault files. Execute custom initialization and destruction scripts, and monitor global object presence for robust library management.",
+  "author": "AOPA",
+  "authorUrl": "https://github.com/AOPA-Architect",
+  "isDesktopOnly": false
+}
