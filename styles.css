@@ -1,48 +1,86 @@
---- START OF FILE styles.css ---
-
 /* --- ScriptPilot Plugin Styles --- */
 
-/* General Warning Callout in Settings - Uses Obsidian's native callout styling */
-/* .scriptpilot-warning is now just .callout with data-callout attribute */
-/* Ensure callout styles are distinct for different severities if needed */
+/* General Text Wrapping - Applied to specific elements for better control */
+
+/* Callout Styling */
 .callout[data-callout="warning"] .callout-title,
 .callout[data-callout="caution"] .callout-title {
     /* Default Obsidian styling is usually good */
 }
 .callout[data-callout="danger"] .callout-title {
-    background-color: var(--color-red); /* Changed: Solid red background for better contrast */
-    color: var(--text-on-accent); /* Changed: White/light text for better contrast */
+    background-color: var(--color-red);
+    color: var(--text-on-accent);
 }
 .callout[data-callout="danger"] .callout-icon svg {
-    color: var(--text-on-accent); /* Changed: White/light icon for better contrast */
+    color: var(--text-on-accent);
 }
+
+/* Text wrapping for callout titles and content */
+.callout .callout-title-inner {
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+}
+.callout .callout-content,
+.callout .callout-content p,
+.callout .callout-content li,
+.callout .callout-content ul,
+.callout .callout-content ol {
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+}
+
+/* --- CRITICAL FIX ATTEMPT: Force collapsible callout content to always be visible and full height --- */
+/* This targets ANY callout with data-callout-fold attribute, ensuring its content is always open */
+.callout[data-callout-fold] .callout-content {
+    max-height: none !important; /* Remove any max-height clipping */
+    height: auto !important;     /* Let content define height */
+    overflow: visible !important; /* Ensure content is not clipped by its own box */
+    display: block !important;   /* Ensure it's not hidden by display: none */
+    transition: none !important; /* Disable any height transition that might collapse it */
+    min-height: fit-content !important; /* Ensure minimum height is its content */
+}
+/* Disable click-to-collapse behavior for collapsible callouts */
+.callout[data-callout-fold] .callout-title {
+    pointer-events: none !important; /* Prevent interaction with the title */
+    cursor: default !important;      /* Change cursor to indicate no interaction */
+}
+
 
 /* Individual Library Entry in Settings List */
 .scriptpilot-entry {
-    padding: 12px 0; /* Slightly more padding */
+    padding: 12px 0;
     border-bottom: 1px solid var(--background-modifier-border);
+    box-sizing: border-box;
+    max-width: 100%;
 }
 .scriptpilot-entry:last-child {
     border-bottom: none;
 }
 .scriptpilot-entry .setting-item-info {
-    flex-grow: 1; /* Allow info to take available space */
+    flex-grow: 1;
+    min-width: 0; /* Fixes flex item overflow issues if children are too wide */
 }
 .scriptpilot-entry .setting-item-name {
-    display: flex; /* Align status indicator nicely */
+    display: flex;
     align-items: center;
-    font-weight: var(--font-semibold); /* Make name slightly bolder */
+    font-weight: var(--font-semibold);
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
 }
 
 /* Status Indicator Icons */
 .scriptpilot-status-indicator {
     margin-left: 8px;
     font-size: var(--font-ui-small);
-    display: inline-flex; /* Helps with icon alignment */
+    display: inline-flex;
     align-items: center;
+    flex-shrink: 0; /* Prevent icon from shrinking if name is long */
 }
 .scriptpilot-status-indicator svg {
-    width: var(--icon-s); /* Consistent icon size */
+    width: var(--icon-s);
     height: var(--icon-s);
 }
 .scriptpilot-status-loading svg { color: var(--text-accent); animation: spin 1s linear infinite; }
@@ -59,71 +97,129 @@
 .scriptpilot-error-message {
     color: var(--color-red);
     font-size: var(--font-ui-smaller);
-    margin-top: 4px; /* More space */
+    margin-top: 4px;
     white-space: pre-wrap;
-    word-break: break-word; /* Changed from break-all for better readability */
+    overflow-wrap: break-word;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 /* Global Object Presence Status Text */
-.scriptpilot-global-status-present {
-    color: var(--color-green);
-    font-size: var(--font-ui-smaller);
-    margin-top: 2px;
-}
+.scriptpilot-global-status-present,
 .scriptpilot-global-status-absent {
-    color: var(--color-orange);
     font-size: var(--font-ui-smaller);
     margin-top: 2px;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
 }
+.scriptpilot-global-status-present { color: var(--color-green); }
+.scriptpilot-global-status-absent { color: var(--color-orange); }
+
 
 /* Controls for each library entry */
 .scriptpilot-controls .setting-item-control {
     justify-content: flex-end;
-    gap: var(--size-2-2); /* Spacing between buttons using Obsidian variable */
+    gap: var(--size-2-2);
 }
 .scriptpilot-controls .setting-item-control button {
-    padding: var(--size-2-2) var(--size-2-3); /* Consistent button padding */
+    padding: var(--size-2-2) var(--size-2-3);
 }
 
 
 /* Styling for the main modal (LibraryEditModal) */
-/* Apply transitions to the modal container for overall fade */
 .modal-container {
-    transition: opacity 0.2s ease-out; /* Added: Smooth fade for the entire modal container */
+    transition: opacity 0.2s ease-out;
 }
 
-/* Apply transitions to the specific modal box (where .scriptpilot-modal is applied) */
 .scriptpilot-modal { /* This class is likely on the .modal element */
-    transition: transform 0.2s ease-out, opacity 0.2s ease-out; /* Added: Smooth transition for modal box */
-    will-change: transform, opacity; /* Added: Hint to browser for performance optimization */
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    will-change: transform, opacity;
+    /* Ensure the modal itself is a flex container for its content */
+    display: flex;
+    flex-direction: column;
+    /* Ensure modal has a defined height to allow its content to scroll */
+    /* This might be handled by Obsidian's core modal styles, but reinforcing */
+    height: 100%; /* Or a specific height if needed for mobile */
+    max-height: 100%;
 }
 
 .scriptpilot-modal .modal-content {
-    padding: var(--modal-padding); /* Use Obsidian's modal padding */
-    will-change: transform, opacity; /* Re-added: Hint to browser for performance optimization for content */
-    /* Removed: transition: none !important; as we want smooth transitions now */
+    padding: var(--modal-padding);
+    will-change: transform, opacity;
+    max-width: 100%;
+    box-sizing: border-box;
+    /* CRITICAL for sticky elements inside flex containers with overflow */
+    min-height: 0 !important; /* Allow content to shrink if needed */
+    /* Ensure modal content is the scrollable area */
+    overflow-y: auto !important; /* Explicitly make this the scrollable area */
+    /* Ensure it takes up available space in its flex parent (.modal) */
+    flex-grow: 1 !important;
+    flex-basis: auto !important; /* Allow flexbox to determine its base size */
 }
-.scriptpilot-modal h2 {
-    margin-bottom: var(--size-4-4); /* Space below modal title */
+.scriptpilot-modal h2 { /* This is likely the .modal-title if inside .modal-content */
+    margin-bottom: var(--size-4-4);
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
 }
+
+/* Ensure text in all setting items within the modal wraps correctly */
 .scriptpilot-modal .setting-item {
-    padding: var(--size-2-3) 0; /* Consistent padding for settings in modal */
+    padding: var(--size-2-3) 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.scriptpilot-modal .setting-item-name,
+.scriptpilot-modal .setting-item-description {
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+    display: block;
 }
 
-/* Critical Security Warning in Modal */
-.scriptpilot-modal .callout[data-callout="danger"] {
-    margin-bottom: var(--size-16-4); /* Changed: Increased margin to a very large Obsidian variable */
-    position: relative; /* Ensure z-index applies correctly */
-    z-index: 99999;
-    color: var(--text-normal); /* Use normal text color for contrast */
 
-    /* Ensure the callout itself has enough internal space and doesn't clip its content */
-    padding-bottom: var(--size-4-2); /* Add padding to the bottom of the callout */
-    min-height: fit-content; /* Ensure it takes at least the height of its content */
-    display: block; /* Ensure it's a block element and takes full width/height */
-    overflow: visible; /* Ensure content is not clipped internally */
-    flex-shrink: 0; /* If the parent is a flex container, prevent shrinking */
-    clear: both; /* Add clear: both just in case of floats, though unlikely */
+/* Critical Security Warning in Main Settings Tab (Red Danger Callout) */
+/* This is the red danger callout in the main settings, not the modal */
+.scriptpilot-settings-section .callout[data-callout="danger"] {
+    margin-bottom: var(--size-16-4);
+    position: relative;
+    z-index: 99999;
+    color: var(--text-normal);
+    padding-bottom: var(--size-4-2);
+    min-height: fit-content;
+    display: block;
+    overflow: visible;
+    flex-shrink: 0;
+    clear: both;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* --- CRITICAL FIX ATTEMPT: In-Modal Security Reminder (Warning Callout) - Make it Sticky and fully visible --- */
+.scriptpilot-modal .scriptpilot-modal-security-warning.callout[data-callout="warning"] {
+    position: -webkit-sticky; /* For Safari compatibility */
+    position: sticky;
+    top: 0; /* Stick to the top of the .modal-content scrollable area */
+    z-index: 99999; /* Needs to be higher than other non-sticky content within .modal-content */
+
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    margin-left: 0; /* Reset default margins that might push it */
+    margin-right: 0;
+    margin-bottom: var(--size-4-4); /* Space below the sticky callout before other content starts */
+
+    /* CRITICAL for ensuring it takes its full content height and doesn't shrink */
+    min-height: fit-content !important; /* Ensure minimum height is its content */
+    height: auto !important;            /* Let content define height */
+    max-height: fit-content !important; /* Explicitly tell it to fit its content, overriding any external max-height */
+    overflow: visible !important;       /* Ensure nothing inside it is clipped */
+    flex-shrink: 0 !important;          /* Prevent it from shrinking in a flex container */
+    
+    /* Add a background color to ensure it's opaque when sticky and content scrolls underneath */
+    background-color: var(--background-primary); /* Matches modal background for seamless stickiness */
+    padding: var(--size-4-2); /* Consistent padding on all sides for the sticky element */
 }
 
 
@@ -131,14 +227,17 @@
 .scriptpilot-code-input {
     font-family: var(--font-monospace);
     font-size: var(--font-ui-smaller);
-    min-height: 80px; /* Ensure decent height */
-    resize: vertical; /* Allow vertical resize */
-    background-color: var(--background-secondary); /* Differentiate from normal text inputs */
+    min-height: 80px;
+    max-height: 400px; /* Prevent excessive height */
+    resize: vertical;
+    background-color: var(--background-secondary);
     border: 1px solid var(--background-modifier-border);
     border-radius: var(--radius-s);
-    width: 100%; /* Make textarea fill its parent container */
-    white-space: pre-wrap; /* Ensure content wraps while preserving line breaks */
-    word-break: break-word; /* Break long words if necessary */
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
 }
 
 
@@ -146,9 +245,12 @@
 .modal-button-container {
     display: flex;
     justify-content: flex-end;
-    margin-top: var(--size-4-5); /* More space above buttons */
-    gap: var(--size-2-3); /* Space between buttons */
+    margin-top: var(--size-4-5);
+    gap: var(--size-2-3);
+    width: 100%;
+    box-sizing: border-box;
 }
+
 
 /* Real-time status panel in settings */
 .scriptpilot-realtime-status-panel {
@@ -158,11 +260,22 @@
     border-radius: var(--radius-m);
     font-size: var(--font-ui-small);
     border: 1px solid var(--background-modifier-border);
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.scriptpilot-realtime-status-panel h3 {
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
 }
 
 .scriptpilot-realtime-item {
     padding: var(--size-2-1) 0;
-    border-bottom: 1px solid var(--background-modifier-border-hover); /* Subtle separator */
+    border-bottom: 1px solid var(--background-modifier-border-hover);
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
 }
 .scriptpilot-realtime-item:last-child {
     border-bottom: none;
@@ -171,7 +284,55 @@
 /* Source URL/File Path display in library list */
 .scriptpilot-source {
     font-size: var(--font-ui-smaller);
-    color: var(--text-muted); /* Use muted color for less emphasis */
-    word-break: break-all; /* Allow long URLs/paths to break */
+    color: var(--text-muted);
     margin-top: 2px;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+}
+
+/* General Obsidian setting item structure fixes/enhancements */
+.setting-item {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.setting-item .setting-item-info {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0; /* CRUCIAL for preventing overflow of flex children (like long text inputs) */
+}
+
+.setting-item .setting-item-control {
+    flex-shrink: 0; /* Prevent controls (buttons, toggles) from shrinking */
+}
+
+/* Specific fix for input field width next to buttons in modals (e.g., File Path in Vault) */
+.scriptpilot-modal .setting-item-control {
+    display: flex; /* Ensure it's a flex container */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if space is constrained */
+    align-items: center; /* Align items vertically */
+    gap: var(--size-2-2); /* Space between items */
+}
+
+.scriptpilot-modal .setting-item-control input[type="text"],
+.scriptpilot-modal .setting-item-control input[type="url"],
+.scriptpilot-modal .setting-item-control input[type="number"] {
+    flex-grow: 1; /* Allow the input to take available space */
+    min-width: 150px; /* Ensure a minimum width for usability */
+    width: auto !important; /* Override inline calc() and let flexbox manage */
+    box-sizing: border-box;
+}
+
+.scriptpilot-modal .setting-item-control button {
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+/* Ensure setting item names and descriptions within any setting item wrap correctly */
+.setting-item-name,
+.setting-item-description {
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+    display: block;
 }
